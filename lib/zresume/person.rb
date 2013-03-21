@@ -3,10 +3,12 @@ require 'yaml'
 require 'zresume/printable'
 module Zresume
     module Person
+        include Zresume::Printable
         def self.included(base)
-            base.extend(ClassCore)
+            base.extend(Core)
         end
-        module ClassCore
+
+        module Core
             def metaclass
                 class << self
                     self
@@ -41,13 +43,12 @@ module Zresume
                 end#initialize, add the instance variables
             end
         end
-        include Zresume::Printable
         
         def item arg='', &bl
             tmp = Zresume::List.new
             tmp.title = arg
             tmp.instance_eval &bl if block_given?
-            @tmpbox << tmp  
+            @tmpbox << tmp
         end
 
         def to_hash
