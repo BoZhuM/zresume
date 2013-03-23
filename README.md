@@ -1,6 +1,11 @@
 # Zresume
 
 TODO:
+* Add command line interface
+  * `zresume new YourClassName` : generate the Scaffold of Your Personal Resume
+  * `zresume g [format]` : generate a static file in the format passed in .
+* Add printable feature
+  * let the customized class support .md and html
 
 ## Installation
 
@@ -28,7 +33,9 @@ You can pass in a block as the value too. In this block, You can use the method 
     require 'zresume'
     class YourName
         include Zresume::Person
-        info :name, :age, :gender, :experiences, :works, :skills, :working_env, :public_accounts, :gembox
+        info :name, :age, :gender, :experiences, :works, :skills, :working_env, :public_
+        accounts, :gembox
+        #register the attributes
         name 'My Name'
         age  25
         gender 'male'
