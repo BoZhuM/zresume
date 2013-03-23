@@ -17,10 +17,11 @@ Or install it yourself as:
     $ gem install zresume
 
 ## Syntax
-    `info *array` register the attributes you need.
-    Once you set the attribute by `info` you can set it's value simply by `attrname value`.
-    The Value can Be Any Kind of Ruby Object. Mostly you set it a string, number or array.
-    You can pass in a block as the value too. In this block, You can use the method `item(arg='string', &block)` to generate a  instance of Zresume::List(a hash like Class, To store more infomations) for you. if you pass in a block to `item`, in this block, you get the freedom to write code just like construct a hash just remove ':' or '=>'. In the following example, You can see it.
+`info *array` register the attributes you need.Once you set the attribute by `info` you can set it's value simply by `attrname value`.
+
+The Value can Be Any Kind of Ruby Object. Mostly you set it a string, number or array.You can pass in a block as the value too. 
+
+In this block, You can use the method `item(arg='string', &block)` to generate a  instance of Zresume::List(a hash like Class, To store more infomations) for you. if you pass in a block to `item`, in this block, you get the freedom to write code just like construct a hash just remove ':' or '=>'. In the following example, You can see it.
 
 ## Usage
 ```ruby
@@ -53,8 +54,10 @@ Or install it yourself as:
                  And My Job is #{do_what}.
                 "
               EOF
-              #position, do_what, use, company_url, and output are not predefined methods.You just write it, and you will get a method named by it, and set the value for you.right now you can access the value.
-              #In This Example, `YourName.new.experiences[0].do_what` will get the value 'Web Site interface design. Convert PSD to HTML+CSS+JS.' 
+              #position, do_what, use, company_url, and output are not predefined methods.#You just write it, and you will get a method named by it, 
+              #and set the value for you.right now you can access the value.
+              #In This Example, `YourName.new.experiences[0].do_what` will 
+              #get the value 'Web Site interface design. Convert PSD to HTML+CSS+JS.' 
            end
 
            item '2011-2012' do
