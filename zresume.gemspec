@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Zresume::VERSION
   spec.authors       = ["suffering"]
   spec.email         = ["zhuboliu@gmail.com"]
-  spec.description   = %q{Use this to write a resume for yourslef.}
+  spec.description   = %q{Use this to write a resume for you.}
   spec.summary       = %q{Write resume by ruby, generate serval different kids of files.}
   spec.homepage      = ""
   spec.license       = "MIT"
