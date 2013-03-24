@@ -83,14 +83,14 @@ You can pass in a block as the value too. In this block, You can use the method 
 
         working_env do
           item do
-            system 'Ubuntu Linux 12.04 LTS'
+            working_system 'Ubuntu Linux 12.04 LTS'
             vps  'Linode 512'
             webserver 'Nginx'
             editor 'Sublime Text2'
             language 'Ruby 1.9.3'
             framework 'Rails 2.x-3.x'
             database 'Mysql/Mongodb'
-            test 'Rspec'
+            test_frame 'Rspec'
             vcs 'Git'
           end
         end
