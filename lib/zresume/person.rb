@@ -33,11 +33,9 @@ module Zresume
                 class_eval do
                     define_method(:initialize) do
                         self.class.info.each do |k, v|
-                            @tmpbox ||= []
                             v =  self.instance_eval(&v) if v.respond_to? :lambda?
                             instance_variable_set("@#{k}", v)
                             self.class.info[k] = v
-                            self.instance_eval{remove_instance_variable :@tmpbox}
                         end
                     end
                 end#initialize, add the instance variables
@@ -54,5 +52,13 @@ module Zresume
         def to_hash
             self.class.info
         end
+
+        # def _meta
+        #     @meta ||= {}
+        # end
+
+        # def method_missing(m, *arg, &bloc)
+        #      unless arg.empty?
+        # end
     end
 end
