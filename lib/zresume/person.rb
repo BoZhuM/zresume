@@ -33,8 +33,10 @@ module Zresume
                 class_eval do
                     define_method(:initialize) do
                         self.class.info.each do |k, v|
+                            @tmpbox = []
                             v =  self.instance_eval(&v) if v.respond_to? :lambda?
                             instance_variable_set("@#{k}", v)
+                            remove_instance_variable(:@tmpbox)
                             self.class.info[k] = v
                         end
                     end
