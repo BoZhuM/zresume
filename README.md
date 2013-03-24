@@ -33,8 +33,7 @@ You can pass in a block as the value too. In this block, You can use the method 
     require 'zresume'
     class YourName
         include Zresume::Person
-        info :name, :age, :gender, :experiences, :works, :skills, :working_env, :public_
-        accounts, :gembox
+        info :name, :age, :gender, :experiences, :works, :skills, :working_env, :public_accounts, :gembox
         #register the attributes
         name 'My Name'
         age  25
@@ -83,22 +82,26 @@ You can pass in a block as the value too. In this block, You can use the method 
         skills  %w{ruby rails javascript jquery html css}
 
         working_env do
-          system 'Ubuntu Linux 12.04 LTS'
-          vps  'Linode 512'
-          webserver 'Nginx'
-          editor 'Sublime Text2'
-          language 'Ruby 1.9.3'
-          framework 'Rails 2.x-3.x'
-          database 'Mysql/Mongodb'
-          test 'Rspec'
-          vcs 'Git'
+          item do
+            system 'Ubuntu Linux 12.04 LTS'
+            vps  'Linode 512'
+            webserver 'Nginx'
+            editor 'Sublime Text2'
+            language 'Ruby 1.9.3'
+            framework 'Rails 2.x-3.x'
+            database 'Mysql/Mongodb'
+            test 'Rspec'
+            vcs 'Git'
+          end
         end
 
         public_accounts do
-          email 'zhuboliu@gmail.com'
-          qq 455912224
-          git 'https://github.com/suffering'
-          phone 11111111111
+          item do
+            email 'zhuboliu@gmail.com'
+            qq 455912224
+            git 'https://github.com/suffering'
+            phone 11111111111
+          end
         end
 
         gembox %w{devise cancan bootstrap coffeescript rspec mongoid carrierwave simple_form ckeditor kaminari active_admin}
