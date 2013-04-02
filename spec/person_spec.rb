@@ -37,22 +37,11 @@ describe Zresume::Person do
                     item 'http://edu.tevogroup.com/'
                     item 'http://www.jndchina.com/'
                 end
-                delete do
-                    item 'test'
-                end
             end
             z = Kids.new
-            p z.to_hash
-            p z
-            # p z.class.instance_methods(false)
-            z.experience[1].title.should == "xxx"
-            z.experience[0].position.should == "Web Master & Programmer"
-            z.experience[0].time.should == "2010-2011"
-            z.experience[0].output.should == "2010-2011, Shenzhen Goldsan electronic STD, Web Master & Programmer"
-            z.works[0].title.should      == 'http://www.tevogroup.com/'
-            # p z.works[0]. to_s
-            z.works[1].title.should      == 'http://edu.tevogroup.com/'
-            z.works[2].title.should      == 'http://www.jndchina.com/'
+            z.experience.item[0].company.should == "Shenzhen Goldsan electronic STD"
+            z.works.item.should == ['http://www.tevogroup.com/', 'http://edu.tevogroup.com/', 'http://www.jndchina.com/']
+            z.experience.item[0].output.should == "2010-2011, Shenzhen Goldsan electronic STD, Web Master & Programmer"
         end
     end
 end

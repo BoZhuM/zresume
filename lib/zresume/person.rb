@@ -1,6 +1,5 @@
 #inspired by _why: http://mislav.uniqpath.com/poignant-guide/dwemthy/
-require 'yaml'
-require 'zresume/printable'
+require 'zresume/list'
 module Zresume
     module Person
         include Zresume::Printable
@@ -33,34 +32,21 @@ module Zresume
                 class_eval do
                     define_method(:initialize) do
                         self.class.info.each do |k, v|
-                            @tmpbox = []
-                            v =  self.instance_eval(&v) if v.respond_to? :lambda?
+                            if v.respond_to? :lambda?
+                                s =  Zresume::List[:title, k]
+                                s.instance_eval &v
+                                v = s
+                            end
                             instance_variable_set("@#{k}", v)
-                            remove_instance_variable(:@tmpbox)
                             self.class.info[k] = v
                         end
                     end
                 end#initialize, add the instance variables
             end
         end
-        
-        def item arg='', &bl
-            tmp = Zresume::List.new
-            tmp.title = arg
-            tmp.instance_eval &bl if block_given?
-            @tmpbox << tmp
-        end
 
         def to_hash
             self.class.info
         end
-
-        # def _meta
-        #     @meta ||= {}
-        # end
-
-        # def method_missing(m, *arg, &bloc)
-        #      unless arg.empty?
-        # end
     end
 end

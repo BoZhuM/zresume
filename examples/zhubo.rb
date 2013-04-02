@@ -1,44 +1,50 @@
-# Zresume
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'zresume'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install zresume
-
-## Syntax
-`info *array` register the attributes you need.Once you set the attribute by `info` you can set it's value simply by `attrname value`.
-
-The Value can Be Any Kind of Ruby Object. Mostly you set it a string, a number or an array.
-
-
-
-## Usage
-
-```ruby
     require 'zresume'
     class YourName
         include Zresume::Person
         info :name, :age, :gender, :experiences, :works, :skills, :working_env, :public_accounts, :gembox
         #register the attributes
         name 'My Name'
+        #.name #=> 'My Name'
         age  25
         gender 'male'
-
+        #set the value in the most simplest way. yes? we set key and value just like writting a hash, but we removed the ":" sign.
         works do
-           item 'http://www.example.com' do
+           url 'http://www.example.com' do
               description 'From frontend to backend to deploy, Finished by myself.'
            end
-           item 'http://www.example2.com'
-           item 'http://www.example3.com'
+           # .works.url #=> 'http://www.example.com'
+           url 'http://www.example2.com'
+           # .works.url #=> ['http://www.example.com', 'http://www.example2.com']
+           url 'http://www.example3.com'
+           # .works.url #=> ['http://www.example.com', 'http://www.example2.com', 'http://www.example3.com']
+           lastdesign 'http://www.example4.com'
+           # .works.lastdesign #=> 'http://www.example4.com'
+           github 'https://github.com/xxx1' do
+              desc 'This gem is...' do
+                d1 'deep one' do
+                  d2 'deep two' do
+                    d3 'deep three' do
+                      #...
+                        dn 'deep n'
+                      #...
+                    end
+                  end
+                end
+                #you can nest as deep as you like, but it is not a good idea.
+                d1 'deep one again' do
+                end
+              end
+           end
+           # .works.github #=> {:title => 'https://github.com/xxx1', :desc => 'This gem is...'}
+           github 'https://github.com/xxx2'
+           # .works.github #=> [{:title => 'https://github.com/xxx1', :desc => 'This gem is...'}, 'https://github.com/xxx2']
+           github 'https://github.com/xxx3'
+
+           # The method `url`, `lastdesign` and `github` are not predefined method, 
+           # As you write them in the block, you get these methods.
+           # If a word that not defined before occured in the block, you get a method that return the signed value.
+           # if it was called more than once, you will get an array.
+           # if you pass in a block as the last argument, you will get a hash.
         end
 
         experiences do
@@ -56,7 +62,7 @@ The Value can Be Any Kind of Ruby Object. Mostly you set it a string, a number o
               EOF
               #position, do_what, use, company_url, and output are not predefined methods.#You just write it, and you will get a method named by it, 
               #and set the value for you.right now you can access the value.
-              #In This Example, `YourName.new.experiences[0].do_what` will 
+              #In This Example, `YourName.new.experiences.item[0].do_what` will 
               #get the value 'Web Site interface design. Convert PSD to HTML+CSS+JS.' 
            end
 
@@ -85,7 +91,10 @@ The Value can Be Any Kind of Ruby Object. Mostly you set it a string, a number o
             database 'Mysql/Mongodb'
             test_frame 'Rspec'
             vcs 'Git'
+            editor 'Vim'
         end
+        #this will get a hash that respond to the key-value pair writed before.
+        #.working_env.editor #=> ['Sublime Text2', 'Vim']
 
         public_accounts do
             email 'zhuboliu@gmail.com'
@@ -96,18 +105,3 @@ The Value can Be Any Kind of Ruby Object. Mostly you set it a string, a number o
 
         gembox %w{devise cancan bootstrap coffeescript rspec mongoid carrierwave simple_form ckeditor kaminari active_admin}
     end
-```
-TODO:
-* Add command line interface
-  * `zresume new YourClassName` : generate the Scaffold of Your Personal Resume
-  * `zresume g [format]` : generate a static file in the format passed in .
-* Add printable feature
-  * let the customized class support .md and html
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request

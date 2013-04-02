@@ -1,15 +1,19 @@
 module Zresume
     class List < Hash
-        instance_methods.each do |m|
-            undef_method m unless m.to_s =~ /respond_to?|method_missing|^/
-        end
-        
-        def method_missing(m, *a)
-            m.to_s =~ /=$/ ? self[$`] = a[0] : a!= [] ? self[m.to_s] = a[0] : self[m.to_s]
-        end
-        
-        def to_s
-            output || title
+        def method_missing(m, *a, &bl)
+            if !bl
+                if m.to_s =~ /=$/
+                    self[$`.intern] = a[0]
+                else
+                    return self[m] if a.empty?
+                    self[m] ? self[m]=([self[m]].flatten << a[0]) : self[m] = a[0]
+                end
+            else
+                s =  List[:title, a[0]]
+                s.instance_eval &bl
+                return self[m] = s if !self[m]
+                self[m] = [self[m]].flatten << s
+            end
         end
     end
 end
