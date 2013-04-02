@@ -33,6 +33,7 @@ describe Zresume::Person do
                     item 'xxx'
                 end
                 works do
+                    url 'example.com'
                     item 'http://www.tevogroup.com/'
                     item 'http://edu.tevogroup.com/'
                     item 'http://www.jndchina.com/'
@@ -41,6 +42,7 @@ describe Zresume::Person do
             z = Kids.new
             z.experience.item[0].company.should == "Shenzhen Goldsan electronic STD"
             z.works.item.should == ['http://www.tevogroup.com/', 'http://edu.tevogroup.com/', 'http://www.jndchina.com/']
+            z.works.url.should == 'example.com'
             z.experience.item[0].output.should == "2010-2011, Shenzhen Goldsan electronic STD, Web Master & Programmer"
         end
     end

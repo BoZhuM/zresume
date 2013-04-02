@@ -32,6 +32,7 @@
                 end
                 #you can nest as deep as you like, but it is not a good idea.
                 d1 'deep one again' do
+                  #...
                 end
               end
            end
@@ -105,3 +106,4 @@
 
         gembox %w{devise cancan bootstrap coffeescript rspec mongoid carrierwave simple_form ckeditor kaminari active_admin}
     end
+    p YourName.new.skills
