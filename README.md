@@ -15,11 +15,31 @@ Or install it yourself as:
     $ gem install zresume
 
 ## Syntax
-`info *array` register the attributes you need.Once you set the attribute by `info` you can set it's value simply by `attrname value`.
+`info *array` register the attributes you need.Once you set the attribute by `info` you can set it's value simply following the syntax: `attrname value`.
 
 The Value can Be Any Kind of Ruby Object. Mostly you set it a string, a number or an array.
 
+Once you set the attributes by info, you get the freedom to set the nested attributes,for example, you want to show your working experiences, of course you have more than one experience, so you need an array to store it, you want to store the company name, the position you have been, the skills you use, ect. Just write it:
 
+```ruby
+  ...
+  experiences do
+    year2009_2010 'designer' do
+        company_name 'Google' #have you been there?
+        position 'Frontend Desinger'
+        use 'photoshop'
+        use 'html'
+        use 'css'
+    end
+    year2010_2012 'programmer' do
+        company_name 'home' do
+           desc 'Working as a freelancer'
+           use %W{ruby rails javascript html css photoshp}
+           #...
+        end
+    end
+  end
+``` 
 
 ## Usage
 
@@ -54,9 +74,10 @@ The Value can Be Any Kind of Ruby Object. Mostly you set it a string, a number o
                  And My Job is #{do_what}.
                 "
               EOF
-              #position, do_what, use, company_url, and output are not predefined methods.#You just write it, and you will get a method named by it, 
+              #position, do_what, use, company_url, and output are not predefined methods.
+              #You just write it, and you will get a method named by it, 
               #and set the value for you.right now you can access the value.
-              #In This Example, `YourName.new.experiences[0].do_what` will 
+              #In This Example, `YourName.new.experiences.item[0].do_what` will 
               #get the value 'Web Site interface design. Convert PSD to HTML+CSS+JS.' 
            end
 
